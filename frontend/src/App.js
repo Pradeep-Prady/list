@@ -1,3 +1,4 @@
+import { HelmetProvider } from "react-helmet-async";
 import Create from "./components/Create";
 import ListDetails from "./components/ListDetails";
 import Lists from "./components/Lists";
@@ -9,12 +10,14 @@ function App() {
     <>
       <Router>
         <div className="w-full h-screen ">
-          <Navbar />
-          <Routes>
-            <Route path="/" element={<Lists />} />
-            <Route path="/create" element={<Create />} />
-            <Route path="/:id/details" element={<ListDetails />} />
-          </Routes>
+          <HelmetProvider>
+            <Navbar />
+            <Routes>
+              <Route path="/" element={<Lists />} />
+              <Route path="/create" element={<Create />} />
+              <Route path="/:id/details" element={<ListDetails />} />
+            </Routes>
+          </HelmetProvider>
         </div>
       </Router>
     </>

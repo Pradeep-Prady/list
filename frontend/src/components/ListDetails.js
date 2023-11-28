@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { deleteList, getList, updateList } from "../actions/listActions";
 import { clearListDeleted, clearListUpdated } from "../slices/listSlice";
 import Loader from "./../layouts/Loader";
+import MetaData from "../layouts/MetaData";
 
 export default function ListDetails() {
   const dispatch = useDispatch();
@@ -58,7 +59,7 @@ export default function ListDetails() {
       dispatch(clearListDeleted());
       navigate("/");
     }
-  }, [isListDeleted, dispatch]);
+  }, [isListDeleted, navigate, dispatch]);
 
   useEffect(() => {
     if (list) {
@@ -73,7 +74,9 @@ export default function ListDetails() {
         <Loader />
       ) : (
         <>
-          <div className="w-full h-[90%] overflow-hidden">
+          <MetaData title={`Details`} />
+
+          <div className="w-full h-[90%] overflow-hidden text-[18px]">
             <div className="w-full h-[80%] bg-mywhite">
               <div>
                 <input
@@ -82,6 +85,7 @@ export default function ListDetails() {
                   className="text-center outline-none w-full bg-transparent my-3"
                 />
               </div>
+
               <div className="h-full overflow-y-scroll">
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4   z-0">
                   {addlists?.map((item, index) => (
@@ -162,14 +166,14 @@ export default function ListDetails() {
                     }
                   }}
                   type="submit"
-                  className="bg-mydark w-auto  text-mywhite px-3 py-2 rounded-sm"
+                  className="bg-mydark w-auto  text-mywhite p-3 rounded-sm"
                 >
                   Delete
                 </button>
                 <button
                   onClick={submitHandler}
                   type="submit"
-                  className="bg-mydark w-auto text-mywhite px-3 py-2 rounded-sm"
+                  className="bg-mydark w-auto text-mywhite p-3  rounded-sm"
                 >
                   Save
                 </button>
@@ -178,7 +182,7 @@ export default function ListDetails() {
             <div className="w-full h-[10%] bg-mywhite relative z-50">
               <div className="w-full h-full flex items-center justify-between px-2 sm:px-5">
                 <input
-                  className="py-2 px-3 outline-none bg-mydark text-mywhite w-full rounded-l-sm"
+                  className="p-3 outline-none bg-mydark text-mywhite w-full rounded-l-sm"
                   value={add}
                   onChange={(e) => setAdd(e.target.value)}
                   type="text"
@@ -186,7 +190,7 @@ export default function ListDetails() {
                 />
                 <p
                   onClick={addList}
-                  className="bg-mydark cursor-pointer text-mywhite px-3 py-2 rounded-r-sm"
+                  className="bg-mydark cursor-pointer text-mywhite p-3 rounded-r-sm"
                 >
                   Add
                 </p>
